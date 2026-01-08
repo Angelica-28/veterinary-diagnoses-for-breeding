@@ -10,13 +10,16 @@ The pipeline:
 2. Filters mammary-related treatments and excludes oxytocin.
 3. Merges the dataset with the animal registry to keep all animals.
 4. Merges functional control records.
-5. Assigns the binary phenotype `PAT = 1` to the control closest to the treatment.
+5. Assigns the binary phenotype:
+   - `PAT = 1` to the control closest to the treatment, 0 otherwise
+   - `T = 1` if the cow received a dry-off treatment in that lactation, 0 otherwise
 6. Builds the final dataset with columns:
 
 - `MATR` = animal ID
 - `NL` = lactation number
 - `AZ` = herd/azienda code
 - `PAT` = 1 if at least one mammary event, 0 otherwise
+-  `T` = 1 if at least one mammary event, 0 otherwise
 - `DT_SOMMINISTRAZIONE` = treatment date of the closest event
 - `DT_CONTROLO` = functional control date closest to treatment
 
@@ -185,7 +188,9 @@ write.csv(final_dataset,
 ```
 Final Output Structure
 ```r
-MATR	NL	AZ	PAT	DT_SOMMINISTRAZIONE	DT_CONTROLLO
-IT000	1	001	1	2022-08-03	2022-08-03
-IT000	2	001	0	NA	NA
+MATR	NL	AZ	PAT	T	DT_SOMMINISTRAZIONE	DT_CONTROLLO
+IT000	1	001	1	1	2022-08-03	2022-08-03
+IT000	2	001	0	1	NA	NA
+IT001	1	002	0	0	NA	NA
+IT002	1	003	1	0	2022-07-15	2022-07-16
 ```
