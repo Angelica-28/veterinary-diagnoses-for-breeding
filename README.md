@@ -71,9 +71,9 @@ functional_file <- "functional_records.xlsx"
 
 The treatment dataset is filtered to retain only:
 
-- Mammary pathologies
+- `Mammary pathologies`
 
-- Dry-off treatments
+- `Dry-off treatments`
 
 Treatments containing oxytocin are excluded.
 
@@ -115,7 +115,7 @@ data_final <- data_merged %>%
 ```
 ### Step 6 – Assign pathology to the closest functional control
 
-For each treatment, the closest functional control date is identified and assigned PAT = 1.
+For each treatment, the closest functional control date is identified and assigned `PAT` = 1.
 
 The corresponding treatment and control dates are stored.
 ```r
@@ -147,9 +147,9 @@ data_final <- data_final %>%
 
 For each cow and lactation, the phenotype is defined as:
 
- - PAT = 1 if at least one pathology is present
+ - `PAT` = 1 if at least one pathology is present
 
- - PAT = 0 otherwise
+ - `PAT` = 0 otherwise
 
 Treatment and control dates are retained.
 ```r
@@ -167,23 +167,25 @@ final_dataset <- data_final %>%
 
 The final dataset contains:
 
-- MATR
+- `MATR`
 
-- NL
+- `NL`
 
-- AZ
+- `AZ`
 
-- PAT
+- `PAT`
 
-- DT_SOMMINISTRAZIONE
+- `DT_SOMMINISTRAZIONE`
 
-- DT_CONTROLLO
+- `DT_CONTROLLO`
 ```r
 write.csv(final_dataset,
           "output/final_mammary_phenotype.csv",
           row.names = FALSE)
 ```
 Final Output Structure
+```r
 MATR	NL	AZ	PAT	DT_SOMMINISTRAZIONE	DT_CONTROLLO
 IT000	1	001	1	2022-08-03	2022-08-03
 IT000	2	001	0	NA	NA
+```
